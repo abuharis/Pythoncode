@@ -1,0 +1,60 @@
+#GET
+{
+    "banner":  {
+        "title": "sample tyex",
+        "subtitle": "ubstitle"
+    }
+}
+
+#GET
+{
+    "header": {
+        "logo": "barreleye",
+        "menu": []
+    }
+}
+
+#GET
+{
+    "search_filters": {
+        "programs" [],
+        "types": []
+    }
+}
+
+#POST
+{
+    "search_action": {
+
+    }
+}
+
+{
+    "countries": []
+}
+
+{
+    "footer": {
+        "title": "description",
+        "menus": [],
+        "copyright": "string"
+    }
+}
+
+
+
+
+1. data types
+2. operate
+3. loops
+4. conditions if else
+5. functions
+6. API flask
+7. error handling, try exceptions
+8. modules (pakacge, library, and module)
+
+
+module: functions
+pkg: modules
+library: pakcages
+
