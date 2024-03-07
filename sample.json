@@ -54,7 +54,6 @@
 8. modules (pakacge, library, and module)
 
 
-module: functions
+module: functions/Class
 pkg: modules
 library: pakcages
-

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destination Countries</title>
+    <style>
+        .destination {
+            display: inline-block;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+        img {
+            width: 200px;
+            height: 150px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    {% for dest in dests %}
+
+    <div class="destination">
+        <img src="country1.jpg" alt="Country 1">
+        <h2>{{dest.name}}</h2>
+        <p>{{dest.price}}</p>
+    </div>
+
+    {% endfor %}
+</body>
+</html>

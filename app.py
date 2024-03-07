@@ -50,7 +50,11 @@
 # def get_employee(id):
 #  return next((e for e in employees if e['id'] == id), None)
 
-
+'''
+1. User management: User acceptance
+2. If yes, 200 status, valid
+3. He can start purchasing
+'''
 
 
 
