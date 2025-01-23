@@ -1,3 +1,2 @@
-from mymodules import *
+help("modules")
 
-second.second()

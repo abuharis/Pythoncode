@@ -1,2 +1,6 @@
 def add(a,b):
-  print(a+b)
+    pass
+
+def subtraction(a,b):
+    pass
+

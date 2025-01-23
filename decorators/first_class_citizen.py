@@ -1,3 +1,13 @@
+"""
+In computer science, a first-class citizen is an entity within a programming language that supports all the operations generally available to other entities. 
+These operations typically include:
+1. Being assigned to a variable
+2. Being passed as an argument to a function
+3. Returning from a function
+4. Being returned from a function
+5. Being used as an expression
+"""
+
 # 1. Assigning function to a variable
 
 def plus_one(number):
