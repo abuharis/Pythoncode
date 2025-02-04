@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+        <nav>
+            <a href="{{ url_for('manage_shops') }}">Manage Shops</a>
+            <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Sales Summary</h2>
+        
+        <!-- Filtering Form -->
+        <form method="GET" action="{{ url_for('admin_dashboard') }}">
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" value="{{ request.args.get('start_date', '') }}">
+            
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date" value="{{ request.args.get('end_date', '') }}">
+            
+            <label for="shop_id">Shop:</label>
+            <select id="shop_id" name="shop_id">
+                <option value="">All Shops</option>
+                {% for shop in shops %}
+                    <option value="{{ shop.id }}" {% if request.args.get('shop_id') == shop.id|string %}selected{% endif %}>{{ shop.name }}</option>
+                {% endfor %}
+            </select>
+            
+            <label for="status">Status:</label>
+            <select id="status" name="status">
+                <option value="">All</option>
+                <option value="unsettled" {% if request.args.get('status') == 'unsettled' %}selected{% endif %}>Unsettled</option>
+                <option value="settled" {% if request.args.get('status') == 'settled' %}selected{% endif %}>Settled</option>
+            </select>
+            
+            <button type="submit">Filter</button>
+        </form>
+        
+        <!-- Export Buttons -->
+        <div class="export-buttons">
+            <a href="{{ url_for('export_sales', format='csv', start_date=request.args.get('start_date'), end_date=request.args.get('end_date'), shop_id=request.args.get('shop_id'), status=request.args.get('status')) }}" class="btn">Export CSV</a>
+            <a href="{{ url_for('export_sales', format='pdf', start_date=request.args.get('start_date'), end_date=request.args.get('end_date'), shop_id=request.args.get('shop_id'), status=request.args.get('status')) }}" class="btn">Export PDF</a>
+        </div>
+
+        <!-- Sales Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Shop</th>
+                    <th>Total Sales</th>
+                    <th>Commission</th>
+                    <th>Advance Taken</th>
+                    <th>Balance to Return</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in sales_data %}
+                <tr>
+                    <td>{{ data.shop }}</td>
+                    <td>${{ data.total_sales | round(2) }}</td>
+                    <td>${{ data.commission | round(2) }}</td>
+                    <td>${{ data.advance | round(2) }}</td>
+                    <td>${{ data.balance | round(2) }}</td>
+                    <td>
+                        {% if data.settled %}
+                            <span class="badge bg-success">Settled</span>
+                        {% else %}
+                            <span class="badge bg-warning">Pending</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not data.settled %}
+                            <form action="{{ url_for('settle_sales') }}" method="POST">
+                                <input type="hidden" name="shop_id" value="{{ data.shop_id }}">
+                                <button type="submit" class="btn btn-primary">Settle</button>
+                            </form>
+                        {% else %}
+                            <button disabled class="btn btn-secondary">Settled</button>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+</body>
+</html>

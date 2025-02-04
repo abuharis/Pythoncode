@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Manage Carnivals</h2>
+
+    <form method="POST">
+        <div class="mb-3">
+            <label for="name" class="form-label">Carnival Name</label>
+            <input type="text" class="form-control" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="start_date" class="form-label">Start Date</label>
+            <input type="date" class="form-control" name="start_date" required>
+        </div>
+        <div class="mb-3">
+            <label for="end_date" class="form-label">End Date</label>
+            <input type="date" class="form-control" name="end_date" required>
+        </div>
+        <div class="mb-3">
+            <label for="agent_id" class="form-label">Assign Agent</label>
+            <select name="agent_id" class="form-control" required>
+                {% for agent in agents %}
+                    <option value="{{ agent.id }}">{{ agent.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Carnival</button>
+    </form>
+
+    <h3 class="mt-4">Existing Carnivals</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Agent</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for carnival in carnivals %}
+            <tr>
+                <td>{{ carnival.name }}</td>
+                <td>{{ carnival.start_date }}</td>
+                <td>{{ carnival.end_date }}</td>
+                <td>{{ carnival.agent.username }}</td>
+                <td>
+                    <form action="{{ url_for('delete_carnival', carnival_id=carnival.id) }}" method="POST">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit - Azrics Bank</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Azrics Bank</h1>
+        <nav>
+            <a href="profile" class="btn">Profile</a>
+            <a href="balance" class="btn">Balance</a>
+            <a href="statement" class="btn">Statement</a>
+            <a href="contact" class="btn">Contact Us</a>
+            <a href="logout" class="btn">Logout</a>
+        </nav>
+    </header>
+    <style>
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: #51CCF4;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+
+    <!-- <form action="{{ url_for('deposit') }}" method="post">
+        <label for="amount">Enter deposit amount:</label>
+        <input type="text" name="amount" required>
+        <button type="submit">Deposit</button>
+    </form>
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %} -->
+    
+    <main>
+        <section class="deposit-section">
+            <h2>Deposit Funds</h2>
+            <form action="/deposit" method="POST">
+                <label for="amount">Enter Amount:</label>
+                <input type="number" id="amount" name="amount" required>
+                <button type="submit" class="btn">Deposit</button>
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Azrics Bank. All rights reserved.</p>
+    </footer>
+</body>
+</html>

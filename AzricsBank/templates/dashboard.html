@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard | Azrics Bank</title>
+</head>
+<body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        .balance {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2982eE;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: #51CCF4;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background: #2982eE;
+        }
+    </style>
+    <h1>Welcome, {{ user.full_name }}!</h1>
+    <h2>Balance: ₹{{ user.balance }}</h2>
+
+    <h3>Recent Transactions</h3>
+    <ul>
+        {% for transaction in user.transactions[-5:] %}
+            <li>{{ transaction.date }} - {{ transaction.type }}: ₹{{ transaction.amount }}</li>
+        {% endfor %}
+    </ul>
+    
+
+    <a href="{{ url_for('deposit') }}" class="btn">Deposit</a>
+    <a href="{{ url_for('withdraw') }}" class="btn">Withdraw</a>
+    <a href="{{ url_for('statement') }}" class="btn">View Bank Statement</a>
+    <a href="contact" class="btn">Contact Us</a>
+    <a href="logout" class="btn">Logout</a>
+
+</body>
+</html>

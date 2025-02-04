@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beverage Shop Form</title>
+</head>
+<body>
+    <h2>Beverage Purchase Form</h2>
+    {% if errors %}
+        <ul style="color: red;">
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form method="POST">
+        <label>Name:</label>
+        <input type="text" name="name" value="{{ name or '' }}" required><br><br>
+
+        <label>Age (must be above 18):</label>
+        <input type="text" name="age" value="{{ age or '' }}" required><br><br>
+
+        <label>Email:</label>
+        <input type="email" name="email" value="{{ email or '' }}" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

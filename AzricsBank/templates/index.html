@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azrics Bank</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #51CCF4, #2982EE);
+            text-align: center;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 50px;
+        }
+        .menu {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+        .menu a:hover {
+            text-decoration: underline;
+        }
+        .login-btn {
+            background: white;
+            color: #2982EE;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .login-btn:hover {
+            background: #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <a href="#deposit">Deposit Cash</a>
+        <a href="#balance">Balance Check</a>
+        <a href="#statement">Statement Download</a>
+        <a href="#contact">Contact Us</a>
+    </div>
+    <div class="container">
+        <h1>Welcome to Azrics Bank</h1>
+        <p>Your trusted partner for secure and efficient banking.</p>
+        <button class="login-btn" onclick="location.href='login'">Login</button>
+    </div>
+</body>
+</html>

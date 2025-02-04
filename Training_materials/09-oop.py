@@ -77,7 +77,7 @@ print(person1.age)   # Output: 30
 #Methods in a Class
 #A method is a function defined inside a class that operates on its objects.
 class Student:
-    def __init__(self, name, grade):
+    def __init__(self, name: str, grade: int):
         self.name = name
         self.grade = grade
 

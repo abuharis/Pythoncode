@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Azrics Bank</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+        .profile-container {
+            background: white;
+            padding: 20px;
+            width: 50%;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile-container h2 {
+            color: #2982EE;
+        }
+        .profile-details {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .profile-details p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .logout-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #51CCF4;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h2>Welcome, {{ user.full_name }}!</h2>
+        <div class="profile-details">
+            <p><strong>Account Number:</strong> {{ user['account_number'] }}</p>
+            <p><strong>Email:</strong> {{ user['email'] }}</p>
+            <p><strong>Phone:</strong> {{ user['phone'] }}</p>
+            <p><strong>Account Type:</strong> {{ user['account_type'] }}</p>
+            <p><strong>Balance:</strong> ₹{{ user['balance'] }}</p>
+        </div>
+        <a href="{{ url_for('dashboard') }}" class="logout-btn">Back to Dashboard</a>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </div>
+</body>
+</html>

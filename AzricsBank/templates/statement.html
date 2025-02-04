@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Statement - Azrics Bank</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            width: 60%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background: #51CCF4;
+            color: white;
+        }
+        .filter-section {
+            margin-bottom: 20px;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: #51CCF4;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background: #2982eE;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Bank Statement</h2>
+
+        <div class="filter-section">
+            <label for="filter">Filter by Type: </label>
+            <select id="filter" onchange="filterTransactions()">
+                <option value="all">All</option>
+                <option value="deposit">Deposits</option>
+                <option value="withdrawal">Withdrawals</option>
+            </select>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Transaction Type</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if transactions %}
+                    {% for transaction in transactions %}
+                    <tr>
+                        <td>{{ transaction.date }}</td>
+                        <td>{{ transaction.type | capitalize }}</td>
+                        <td>${{ transaction.amount }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="3">No transactions found</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        
+
+        <a href="{{ url_for('dashboard') }}" class="btn">Back to Dashboard</a>
+    </div>
+
+    <script>
+        function filterTransactions() {
+            let filter = document.getElementById("filter").value;
+            let rows = document.querySelectorAll(".transaction-row");
+
+            rows.forEach(row => {
+                let type = row.getAttribute("data-type");
+                if (filter === "all" || type === filter) {
+                    row.style.display = "";
+                } else {
+                    row.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

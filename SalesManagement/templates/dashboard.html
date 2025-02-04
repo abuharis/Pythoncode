@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Dashboard</h2>
+
+    <!-- Summary Cards -->
+    <div class="summary">
+        <div class="card">
+            <h3>Total Shops</h3>
+            <p>{{ shops | length }}</p>
+        </div>
+        <div class="card">
+            <h3>Total Sales</h3>
+            <p>${{ total_sales }}</p>
+        </div>
+        <div class="card">
+            <h3>Total Commission</h3>
+            <p>${{ total_commission }}</p>
+        </div>
+    </div>
+
+    <!-- Recent Sales Table -->
+    <h3>Recent Sales</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Shop</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Commission</th>
+                <th>Advance</th>
+                <th>Net Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales %}
+            <tr>
+                <td>{{ sale.shop.name }}</td>
+                <td>{{ sale.date.strftime('%Y-%m-%d') }}</td>
+                <td>${{ sale.amount }}</td>
+                <td>${{ sale.amount * (sale.shop.commission_rate / 100) }}</td>
+                <td>${{ sale.advance }}</td>
+                <td>${{ sale.amount - (sale.amount * (sale.shop.commission_rate / 100)) - sale.advance }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+.container {
+    width: 80%;
+    margin: auto;
+    text-align: center;
+}
+.summary {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+.card {
+    background: #0349aa;
+    padding: 20px;
+    border-radius: 5px;
+    width: 30%;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+th {
+    background: #812727;
+    color: white;
+}
+</style>
+{% endblock %}

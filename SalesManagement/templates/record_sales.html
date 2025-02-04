@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Record Sales</h2>
+
+    <form action="{{ url_for('record_sales') }}" method="POST">
+        <label for="shop_id">Shop:</label>
+        <select name="shop_id" required>
+            {% for shop in shops %}
+                <option value="{{ shop.id }}">{{ shop.name }}</option>
+            {% endfor %}
+        </select>
+    
+        <label for="amount">Amount:</label>
+        <input type="number" name="amount" step="0.01" required>
+    
+        <label for="advance">Advance Taken:</label>
+        <input type="number" name="advance" step="0.01" value="0">
+    
+        <button type="submit">Submit Sale</button>
+    </form>    
+    
+</div>
+{% endblock %}
+
+is it beacuse I added the sales today and settled minutes ago. both are in the same data.

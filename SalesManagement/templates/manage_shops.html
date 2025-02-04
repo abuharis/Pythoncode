@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Manage Shops</h2>
+
+    <!-- Add New Shop Form -->
+    <form method="POST">
+        <div class="mb-3">
+            <label for="name" class="form-label">Shop Name</label>
+            <input type="text" class="form-control" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="commission_rate" class="form-label">Commission Rate (%)</label>
+            <input type="number" class="form-control" name="commission_rate" step="0.01" required>
+        </div>
+        <div class="mb-3">
+            <label for="carnival_id" class="form-label">Assign to Carnival</label>
+            <select name="carnival_id" class="form-control" required>
+                {% for carnival in carnivals %}
+                    <option value="{{ carnival.id }}">{{ carnival.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Shop</button>
+    </form>
+
+    <!-- Shop List -->
+    <h3 class="mt-4">Existing Shops</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Commission Rate</th>
+                <th>Carnival</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for shop in shops %}
+            <tr>
+                <td>{{ shop.name }}</td>
+                <td>{{ shop.commission_rate }}%</td>
+                <td>{{ shop.carnival.name }}</td>
+                <td>
+                    <form action="{{ url_for('delete_shop', shop_id=shop.id) }}" method="POST" onsubmit="return confirmDelete();">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- JavaScript for Delete Confirmation -->
+<script>
+    function confirmDelete() {
+        return confirm("Are you sure you want to delete this shop? This action cannot be undone.");
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Sales Report</h2>
+
+    <!-- Filter Form -->
+    <form method="GET" action="{{ url_for('sales_report') }}">
+        <label for="start_date">Start Date:</label>
+        <input type="date" name="start_date" value="{{ start_date or '' }}">
+
+        <label for="end_date">End Date:</label>
+        <input type="date" name="end_date" value="{{ end_date or '' }}">
+
+        <label for="shop_id">Filter by Shop:</label>
+        <select name="shop_id">
+            <option value="">All Shops</option>
+            {% for shop in shops %}
+                <option value="{{ shop.id }}" {% if selected_shop == shop.id|string %}selected{% endif %}>
+                    {{ shop.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Filter</button>
+    </form>
+
+    <!-- Export CSV Button -->
+<a href="{{ url_for('export_sales', start_date=start_date, end_date=end_date, shop_id=selected_shop) }}" class="btn btn-success">
+    Export as CSV
+</a>
+
+    <!-- Sales Table -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Shop</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Commission</th>
+                <th>Advance</th>
+                <th>Net Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in report %}
+                <tr>
+                    <td>{{ sale.shop }}</td>
+                    <td>{{ sale.date }}</td>
+                    <td>{{ sale.amount }}</td>
+                    <td>{{ sale.commission }}</td>
+                    <td>{{ sale.advance }}</td>
+                    <td>{{ sale.net_total }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

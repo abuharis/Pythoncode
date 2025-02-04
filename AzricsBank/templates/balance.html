@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balance - Azrics Bank</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        .balance {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2982eE;
+        }
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: #51CCF4;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background: #2982eE;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Your Current Balance</h2>
+        <p class="balance">{{ balance }} USD</p>
+        <a href="{{ url_for('dashboard') }}" class="btn">Back to Dashboard</a>
+        <a href="contact" class="btn">Contact Us</a>
+    </div>
+</body>
+</html>
